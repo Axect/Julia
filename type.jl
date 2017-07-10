@@ -4,9 +4,13 @@ type Person
 end
 
 function Add(p::Person)
-    p.account += 1
+    for i=1:1e+06
+        p.account += 1
+    end
 end
 
 A = Person("Axect", 1)
+start = time()
 Add(A)
-print(A.account)
+elapsed = time() - start
+println(A.account, " ", elapsed)
