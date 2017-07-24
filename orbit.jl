@@ -27,6 +27,12 @@ function Plus(A::Vector, B::Vector)::Vector
     return C
 end
 
+function Add(A::Vector, B::Vector)
+    A.x += B.x
+    A.y += B.y
+    A.z += B.z
+end
+
 function Mul(A::Vector, F::Float64)::Vector
     B  = Vector(0,0,0)
     B.x = F * A.x
@@ -41,26 +47,28 @@ end
 
 function Running(r::Vector, v::Vector)
     a = Mul(r, float(-G*M/(Norm(r)^3)))
-    v = Plus(v, Mul(a, float(tstep)))
-    r = Plus(r, Mul(v, float(tstep)))
+    Add(v, Mul(a, float(tstep)))
+    Add(r, Mul(v, float(tstep)))
 end
 
 function main()
     i1, i2 = Initialize()
     C = zeros(N+1)
     C[1] = i1.x; C[2] = i2.x
-    v1 = Plus(i1, Mul(i2, -1./tstep))
+    v1 = Plus(Mul(i1, 1./tstep), Mul(i2, -1./tstep))
     r = i2; v=v1;
-    println(Norm(r)/AU)
+    println(r.x/AU, v.x/AU)
+    start = time()
     for i=3:N+1
         Running(r, v)
         if i == 3
-            println(r.x/AU)
+            println(r, v)
         end
         C[i] = r.x
     end
+    elapsed = time() - start
     X = [1:N+1...];
-    println(C[1], C[7300])
+    println(elapsed)
     plot(X, C)
     savefig("Test.png")
 end
