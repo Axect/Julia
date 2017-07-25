@@ -1,4 +1,4 @@
-a = 1:1e+08
+a = [1:1e+06...]
 s = 0
 start = time()
 for i in a
