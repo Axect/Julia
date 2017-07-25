@@ -51,13 +51,14 @@ function Running(r::Vector, v::Vector)
     Add(r, Mul(v, float(tstep)))
 end
 
+i1, i2 = Initialize()
+C = zeros(N+1)
+
 function main()
-    i1, i2 = Initialize()
-    C = zeros(N+1)
     C[1] = i1.x; C[2] = i2.x
     v1 = Plus(Mul(i1, 1./tstep), Mul(i2, -1./tstep))
     r = i2; v=v1;
-    println(r.x/AU, v.x/AU)
+    #println(r.x/AU, v.x/AU)
     start = time()
     for i=3:N+1
         Running(r, v)
@@ -67,9 +68,10 @@ function main()
         C[i] = r.x
     end
     elapsed = time() - start
-    X = [1:N+1...];
+    #X = [1:N+1...];
     println(elapsed)
-    plot(X, C)
-    savefig("Test.png")
+    #plot(X, C)
+    #savefig("Test.png")
 end
+
 main()
