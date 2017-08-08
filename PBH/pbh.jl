@@ -29,13 +29,15 @@ function init(R::RGE)
 	   R.G = 1
 end
 
-function MakeBeta()
-    
+function MakeBeta(γ)
+    return function f(f1::Float64, f2::Float64)::Float64
+        temp = 1/(16π^2)        
+    end
 end
 
 function Running(R::RGE, mt::Float64, xi::Float64)
     hg = sqrt(2) / R.yt * mt * exp(R.t)
-    sh = (1 + xi * hg^2 / MpR^2) / (1 + (1 + 6xi) * xi * hg^2 / MpR^2)
+    sh = (1 + xi * hg^2 / MspR^2) / (1 + (1 + 6xi) * xi * hg^2 / MpR^2)
     
     # 1-loop Beta Function
     β1_g1 = (81 + sh) / 12 * R.g1^3
@@ -49,4 +51,6 @@ function Running(R::RGE, mt::Float64, xi::Float64)
 
     
 
-end
+
+
+end+

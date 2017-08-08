@@ -11,5 +11,5 @@ function main()
     p2 = plot(g, x)
     p3 = plot(h, x)
 
-    plot(p1, p2, p3, layout=(3,1), legend=false)
+    plot(p1, p2, p3, layout=(3,1), legend=false, grid=false)
 end
