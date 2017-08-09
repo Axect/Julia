@@ -12,5 +12,6 @@ function main()
     p2 = plot(g, x)
     p3 = plot(h, x)
 
-    plot(p1, p2, p3, layout=(3,1), legend=false, grid=false)
+    plot(p1, p2, p3, layout=(3,1), size=(1920,1080), legend=false, grid=false)
+    savefig("Tutorial/Fig/plot.png")
 end
