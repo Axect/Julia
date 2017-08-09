@@ -1,4 +1,5 @@
 using Plots
+gr()
 
 function main()
     x = [0:0.01:10...]
