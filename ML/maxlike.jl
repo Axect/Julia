@@ -22,7 +22,6 @@ function main()
     T = -4:0.01:4
     d1 = Normal(0, 1)
     yt1 = pdf(d1, T)
-    # figure(width=800, height=600)
     p1 = plot(T, yt1, size=(1000, 600))
     title!("\\sigma")
     xlabel!("x")
