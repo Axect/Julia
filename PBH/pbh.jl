@@ -1,5 +1,5 @@
 const Mp = 1.221 * 1E+19
-const MpR = 2.4 * 1E+18 
+const MpR = 2.4 * 1E+18
 const MW = 80.385
 const MZ = 91.1876
 const MH = 125.09
@@ -38,8 +38,8 @@ end
 
 function Running(R::RGE, mt::Float64, xi::Float64)
     hg = sqrt(2) / R.yt * mt * exp(R.t)
-    sh = (1 + xi * hg^2 / MspR^2) / (1 + (1 + 6xi) * xi * hg^2 / MpR^2)
-    
+    sh = (1 + xi * hg^2 / MpR^2) / (1 + (1 + 6xi) * xi * hg^2 / MpR^2)
+
     # 1-loop Beta Function
     β1_g1 = (81 + sh) / 12 * R.g1^3
     β1_g2 = -(39 - sh) / 12 * R.g2^3
