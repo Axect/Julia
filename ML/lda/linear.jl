@@ -38,7 +38,7 @@ function main()
     println("a=", a)
     println("b=", b)
     L(x) = -a[1] / a[2] * x
-    
+
     # Make DataFrame
     r1, r2 = round(minimum(x) - 1), round(maximum(x) + 1);
     T = r1:0.01:r2;
