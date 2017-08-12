@@ -23,6 +23,7 @@ function Work()
 
     # Make DataFrame
     df = DataFrame(X=repeat(x, outer=[2]), Y=y, index=repeat(["sin", "cos"], inner=[length(y1)]))
+    writetable("Tutorial/Data/sincos.csv", df)
 
     # Plotting
     pl = plot(df, x=:X, y=:Y, color=:index, Geom.point, Geom.smooth, Guide.XLabel("X"), Guide.YLabel("Y"), Guide.title("Gadfly Tutorial"))
