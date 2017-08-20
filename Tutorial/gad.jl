@@ -1,6 +1,6 @@
 using Gadfly, DataFrames, Distributions
 
-# Create Sample
+# Create Sample2
 function Sample(n::Int64)::Array{Float64}
     x = 0 + 1 * randn(n)
     return x
