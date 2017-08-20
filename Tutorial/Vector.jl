@@ -5,7 +5,7 @@ mutable struct Vector
 end
 
 function Norm(V::Vector)
-    return sqrt(V.x^2 + V.y^2 + V.z^2)    
+    return sqrt(V.x^2 + V.y^2 + V.z^2)
 end
 
 function main()

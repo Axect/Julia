@@ -19,6 +19,7 @@ mutable struct RGE
 end
 
 function Copy(R::RGE)::RGE
+    # Return New RGE Variables -> Protect Value for running
     S = RGE(0.,0.,0.,0.,0.,0.,0.,0.)
     S.t = R.t
     S.lH = R.lH
@@ -34,13 +35,13 @@ end
 function init(mt::Float64)::RGE
     R = RGE(0.,0.,0.,0.,0.,0.,0.,0.)
     R.t = 0.
-	R.lH = 0.12604 + 0.00206 * (MH - 125.15) - 0.00004 * (mt - 173.34)
-	R.yt = (0.93690 + 0.00556 * (mt - 173.34) - 0.00003 * (MH - 125.15) - 0.00042 * (alphasMZ - 0.1184) / 0.0007)
-	R.g3 = 1.1666 + 0.00314 * (alphasMZ - 0.1184) / 0.007 - 0.00046 * (mt - 173.34)
-	R.g2 = 0.64779 + 0.00004 * (mt - 173.34) + 0.00011 * (MW - 80.384) / 0.014
-	R.g1 = 0.35830 + 0.00011 * (mt - 173.34) - 0.00020 * (MW - 80.384) / 0.014
-	R.phi = sqrt(2.) / R.yt * mt * exp(R.t)
-	R.G = 1.
+    R.lH = 0.12604 + 0.00206 * (MH - 125.15) - 0.00004 * (mt - 173.34)
+    R.yt = (0.93690 + 0.00556 * (mt - 173.34) - 0.00003 * (MH - 125.15) - 0.00042 * (alphasMZ - 0.1184) / 0.0007)
+    R.g3 = 1.1666 + 0.00314 * (alphasMZ - 0.1184) / 0.007 - 0.00046 * (mt - 173.34)
+    R.g2 = 0.64779 + 0.00004 * (mt - 173.34) + 0.00011 * (MW - 80.384) / 0.014
+    R.g1 = 0.35830 + 0.00011 * (mt - 173.34) - 0.00020 * (MW - 80.384) / 0.014
+    R.phi = sqrt(2.) / R.yt * mt * exp(R.t)
+    R.G = 1.
     return R
 end
 
@@ -91,8 +92,13 @@ end
 
 # Run generate Array of RGE
 function Run(mt::Float64, xi::Float64)::Array{RGE}
+    # Initialize
     R = init(mt)
+
+    # Make Container of R (RGE)
     Container = Array{RGE}(length(0:h:N))
+    # Julia starts with index 1
+    # Copy makes new variable -> Protect Values
     Container[1] = Copy(R)
     for i = 2:length(0:h:N)
         Running(R, mt, xi)
