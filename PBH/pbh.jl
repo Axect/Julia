@@ -1,3 +1,5 @@
+using Gadfly, DataFrames
+
 const Mp = 1.221 * 1E+19
 const MpR = 2.4 * 1E+18
 const MW = 80.385
@@ -7,6 +9,7 @@ const alphasMZ = 0.1182
 const h = 1E-04
 const N = 44
 
+# Declare RGE Type
 mutable struct RGE
     t::Float64
     lH::Float64
@@ -47,7 +50,7 @@ end
 
 function MakeBeta(γ)
     return function f(f1::Float64, f2::Float64)::Float64
-        temp = 1 / (16π^2) * f1 + 1 / (16 * π^2)^2 * f2
+        temp = 1 / (16π^2) * f1 + 1 / (16π^2)^2 * f2
         return temp / (1 + γ)
     end
 end
@@ -105,4 +108,61 @@ function Run(mt::Float64, xi::Float64)::Array{RGE}
         Container[i] = Copy(R)
     end
     return Container
+end
+
+# Extract Gauge from Container
+function ExtractGauge(mt::Float64, xi::Float64)::DataFrame
+    Cont = Run(mt, xi)
+    T = Array{Float64}(length(Cont))
+    λ = Array{Float64}(length(Cont))
+    Y = Array{Float64}(length(Cont))
+    G1 = Array{Float64}(length(Cont))
+    G2 = Array{Float64}(length(Cont))
+    G3 = Array{Float64}(length(Cont))
+    ϕ = Array{Float64}(length(Cont))
+    G = Array{Float64}(length(Cont))
+    for i=1:length(Cont)
+        T[i] = Cont[i].t
+        λ[i] = Cont[i].lH
+        Y[i] = Cont[i].yt
+        G[i] = Cont[i].G
+        ϕ[i] = Cont[i].phi
+        G1[i] = Cont[i].g1
+        G2[i] = Cont[i].g2
+        G3[i] = Cont[i].g3
+    end
+    df = DataFrame(t=T, λ=λ, yt=Y, g1=G1, g2=G2, g3=G3, ϕ=ϕ, G=G)
+    return df
+end
+
+# Draw Gauge Plots
+function RGEPlot()::Array{DataFrame}
+    println("---------------------------------------------")
+    println("Welcome to RGEPlot")
+    println("---------------------------------------------")
+    println()
+    println("Please Choose draw type")
+    println("1. Gauge")
+    println("2. Potential")
+    println("3. Cosmological Parameter")
+
+    choose = readline(STDIN)
+    choose = chomp(choose)
+    choose = parse(Int64, choose)
+
+    println("Set mass range and step (ex: 170.81 170.84 4)")
+
+    MR = readline(STDIN)
+    MR = split(MR)
+    Mmin = parse(Float64, MR[1])
+    Mmax = parse(Float64, MR[2])
+    Mstep = parse(Int, MR[3])
+
+    DArray = Array{DataFrame}(Mstep)
+    if choose == 1
+        for i=1:Mstep
+            DArray[i] = ExtractGauge(Mmin+(Mmax-Mmin)/(Mstep-1)*(i-1), 50.)
+        end
+    end
+    return DArray
 end
