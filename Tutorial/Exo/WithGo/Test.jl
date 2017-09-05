@@ -1,0 +1,6 @@
+println("Build...")
+run(`go build test.go`)
+println("Build Complete!")
+println()
+println("Running..")
+run(`./test`)
