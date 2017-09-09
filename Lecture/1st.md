@@ -1,43 +1,67 @@
 <h1 style="text-align:center">Julia Lecture</h1>
-<h4 style="text-align:center">- Setting Environment</h4>
+<h4 style="text-align:center">- Intro to Julia</h4>
 <p style="text-align:right"><b>Tae Geun Kim</b></p>
 
-## 1. Install necessary programs
+## 1. Intro to Julia
 
-* Julia ver 0.6.0 or Julia Pro
-* Git
-* VS Code
+* <a href=http://edeftg.dothome.co.kr/julia-intro/>Axect's Blog</a>
 
-## 2. Create Github account
+## 2. Speed Test
 
-1. Go to https://github.com/
-2. Create account
-3. New repository - JuliaTutorial
+### 1) Python
+```Python
+import numpy as np
+import time
 
-## 3. Git Setting
+def Test():
+    start = time.time()
+    A = np.zeros(10**8)
+    for i in range(len(A)):
+        A[i] = i**2
+    end = time.time()
+    return end-start
 
-1. Go to Folder
-2. `git init`
-3. `git config --global user.name [name]`
-4. `git config --global user.email [email]`
-5. `git remote add [alias] https://github.com/[name]/[repository]`
+print(Test())
 
-## 4. Using Git
+# Output : 37.91
+```
 
-1. `git pull [alias] master`
-2. `git add .`
-3. `git commit -am "[Log Message]"`
-4. `git push [alias] master`
+### 2) Julia
+```Julia
+function TestSpeed()
+    A = zeros(10^8)
+    for i = 1:length(A)
+        A[i] = i^2
+    end
+end
 
-## 3,4 or Using VS Code
+@time TestSpeed()
 
-* Just Click. Then Finish
+# Output: 0.39 seconds
+```
 
-## 5. Using VS Code
+### 3) Go
+```Go
+package main
 
-* Ctrl + ` = Open Terminal
-* Add Julia extension
-* Customize your theme or setting file in settings
-    > "julia.executablePath": "/usr/bin/julia",  
-    > "editor.fontFamily": "Hack",  
-    > "terminal.integrated.shell.windows": C:\\Windows\\sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	start := time.Now()
+	var A [1E+08]int
+	a := &A
+	for i := range A {
+		a[i] = i * i
+	}
+	elapsed := time.Since(start)
+	fmt.Println(elapsed)
+}
+// Output : 243.41662ms = 0.243s
+```
+
+## 3. Basic Grammar
+
+### 1) 
