@@ -36,6 +36,7 @@
 ## 5. Using VS Code
 
 * Ctrl + ` = Open Terminal
+* Add Julia extension
 * Customize your theme or setting file in settings
     > "julia.executablePath": "/usr/bin/julia",  
     > "editor.fontFamily": "Hack",  
