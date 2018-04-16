@@ -26,7 +26,7 @@ function main()
   Z = map(pot,X,Y);
   
   surf(x,y,Z)
-  savefig("test.png")
+  savefig("native_dipole.png")
 end
 
 main()
