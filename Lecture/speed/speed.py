@@ -1,13 +1,13 @@
 import numpy as np
-import time
 
 def Test():
-    start = time.time()
     A = np.zeros(10**8)
     for i in range(len(A)):
-        A[i] = i**2
-    end = time.time()
-    return end-start
+        A[i] = 2*i + 1
+    s = 0
+    for a in A:
+        s += a
+    return s
 
 print(Test())
 
