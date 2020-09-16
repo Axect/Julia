@@ -17,6 +17,10 @@ function write_nc(n)
     pm_store = reshape(pm, n^2-1)
     pinv_store = reshape(p1, n^2-1)
 
+    # Solve
+    sol = m \ v
+    println(sol)
+
     nccreate(
              "data/randmat_$n.nc", 
              "var", 
@@ -28,6 +32,7 @@ function write_nc(n)
              "det", det_store,
              "pm", pm_store,
              "pinv", pinv_store,
+             "sol", sol,
     )
 end
 
