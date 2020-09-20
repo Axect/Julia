@@ -6,7 +6,7 @@ function Sqrt(x)
 end
 
 function main()
-    S = readline(STDIN)
+    S = readline()
     s = parse(Int, chomp(S))
     println(Sqrt(s))
 end
