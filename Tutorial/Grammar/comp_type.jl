@@ -1,10 +1,10 @@
-type Vec3D{T}
+struct Vec3D{T}
     x::T
     y::T
     z::T
 end
 
-type  Vec2D{T}
+struct Vec2D{T}
     x::T
     y::T
 end

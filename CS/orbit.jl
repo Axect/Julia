@@ -7,7 +7,7 @@ const N = 730 * 10
 
 using Plots
 
-type Vector
+struct Vector
     x::Float64
     y::Float64
     z::Float64
@@ -57,7 +57,7 @@ function main()
     i1, i2 = Initialize()
     C = zeros(Float64, N+1)
     C[1] = i1.x; C[2] = i2.x
-    v1 = Plus(Mul(i1, 1./tstep), Mul(i2, -1./tstep))
+    v1 = Plus(Mul(i1, 1 / tstep), Mul(i2, -1 / tstep))
     r = i2; v=v1;
     #println(r.x/AU, v.x/AU)
     for i=3:N+1

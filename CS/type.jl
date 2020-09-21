@@ -1,4 +1,4 @@
-type Person
+struct Person
     name::String
     account::Int64    
 end
