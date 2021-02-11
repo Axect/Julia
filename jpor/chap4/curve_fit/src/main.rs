@@ -20,6 +20,9 @@ fn main() {
         .optimize();
 
     p.print();
+    opt.get_error().print();
+
+    println!("");
 
     let xfit = seq(0, 20, 0.1);
     let yfit = model(&xfit, p.to_ad_vec()).unwrap().to_f64_vec();

@@ -2,7 +2,7 @@ from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 
 # Import netCDF file
-ncfile = './curve_fit/data2.nc'
+ncfile = './data.nc'
 data = Dataset(ncfile)
 var = data.variables
 
@@ -29,4 +29,4 @@ plt.plot(xfit, yfit, label=r'Fit')
 # Other options
 plt.legend(fontsize=12)
 plt.grid()
-plt.savefig("plot2.png", dpi=300)
+plt.savefig("plot.png", dpi=300)
