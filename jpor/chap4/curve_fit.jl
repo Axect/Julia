@@ -28,9 +28,11 @@ ds = Dataset("data.nc", "c")
 defDim(ds, "data", length(xdata))
 defDim(ds, "fit", length(xfit))
 
+# define variables
 defVar(ds, "xdata", xdata, ("data",));
 defVar(ds, "ydata", ydata, ("data",));
 defVar(ds, "xfit", xfit, ("fit",));
 defVar(ds, "yfit", yfit, ("fit",));
 
+# close
 close(ds)
