@@ -42,3 +42,6 @@ a = rand(Float32, 10^6)
 
 @btime simdsum_fixed(a)
 
+@code_warntype simdsum(a) # Union
+
+@code_warntype simdsum_fixed(a) # Single type
