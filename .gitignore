@@ -1,3 +1,7 @@
 *.csv
 target/
 */**/target
+.ipynb_checkpoints/
+*/**/.ipynb_checkpoints/
+vscjlsymserv*
+*/**/vscjlsymserv*
