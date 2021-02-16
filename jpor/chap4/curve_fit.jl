@@ -1,5 +1,4 @@
-using LsqFit
-using NCDatasets
+using LsqFit, NCDataFrame, DataFrames
 
 # preparing data for fitting
 xdata = [ 15.2; 19.9;  2.2; 11.8; 12.1; 18.1; 11.8; 13.4; 11.5;  0.5;
@@ -21,18 +20,28 @@ errors = margin_error(fit)
 xfit = 0:0.1:20
 yfit = model(xfit, β_fit)
 
-# create netcdf
-ds = Dataset("data.nc", "c")
+len = length(xfit)
 
-# define dimension
-defDim(ds, "data", length(xdata))
-defDim(ds, "fit", length(xfit))
+ds = DataFrame()
+ds[!,:xdata] = fillmissing(xdata, len)
+ds[!,:ydata] = fillmissing(ydata, len)
+ds[!,:xfit] = xfit
+ds[!,:yfit] = yfit
 
-# define variables
-defVar(ds, "xdata", xdata, ("data",));
-defVar(ds, "ydata", ydata, ("data",));
-defVar(ds, "xfit", xfit, ("fit",));
-defVar(ds, "yfit", yfit, ("fit",));
+writenc(ds, "data.nc")
+
+## create netcdf
+#ds = Dataset("data.nc", "c")
+#
+## define dimension
+#defDim(ds, "data", length(xdata))
+#defDim(ds, "fit", length(xfit))
+#
+## define variables
+#defVar(ds, "xdata", xdata, ("data",));
+#defVar(ds, "ydata", ydata, ("data",));
+#defVar(ds, "xfit", xfit, ("fit",));
+#defVar(ds, "yfit", yfit, ("fit",));
 
 # close
-close(ds)
+#close(ds)
