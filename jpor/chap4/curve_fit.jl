@@ -28,6 +28,8 @@ ds[!,:ydata] = fillmissing(ydata, len)
 ds[!,:xfit] = xfit
 ds[!,:yfit] = yfit
 
+@show ds
+
 writenc(ds, "data.nc")
 
 ## create netcdf
