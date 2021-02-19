@@ -8,7 +8,7 @@ function sequential_alloc(a::Vector{T}) where T <: Number
     end
 end
 
-@btime sequential_alloc($a)
+@time sequential_alloc(a)
 
 b = SharedArray{Float64}(1000_000)
 
@@ -18,6 +18,4 @@ function parallel_alloc(b::SharedArray{T}) where T <: Number
     end
 end
 
-@btime parallel_alloc($b)
-
-
+@time parallel_alloc(b)
